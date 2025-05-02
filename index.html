@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error-Free Edit - Social Links</title>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            /* Define platform colors as variables for easier management */
+            --pinterest-color: #E60023;
+            --youtube-color: #FF0000;
+            --facebook-color: #1877F2;
+            --instagram-color-start: #f09433; /* For gradient */
+            --instagram-color-end: #bc1888;   /* For gradient */
+            --twitter-color: #1DA1F2;
+            --text-light: #ffffff;
+            --text-dark: #333;
+            --container-bg: rgba(255, 255, 255, 0.1);
+            --container-border: rgba(255, 255, 255, 0.2);
+            --link-bg: rgba(255, 255, 255, 0.15);
+            --link-hover-bg: rgba(255, 255, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* ন্যূনতম উচ্চতা স্ক্রিনের সমান */
+            margin: 0;
+            /* Animated Gradient Background */
+            background: linear-gradient(135deg, #667eea, #764ba2, #8b4acf, #e67e22);
+            background-size: 400% 400%;
+            animation: animateGradient 15s ease infinite;
+            padding: 40px 20px; /* উপরে/নিচে এবং পাশে প্যাডিং যোগ করা হলো */
+            /* overflow: hidden; <-- এই লাইনটি মুছে ফেলা হয়েছে */
+            /* যদি কন্টেন্ট বেশি হয় তবে স্ক্রল আসবে */
+            box-sizing: border-box; /* প্যাডিং যেন মোট width/height এর মধ্যে অন্তর্ভুক্ত হয় */
+        }
+
+        /* Keyframes for the background animation */
+        @keyframes animateGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: var(--container-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 25px;
+            border: 1px solid var(--container-border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            padding: 45px 50px;
+            text-align: center;
+            max-width: 500px;
+            width: 95%;
+            color: var(--text-light);
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            animation: popIn 0.8s 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: auto; /* কন্টেইনারকে উল্লম্বভাবে মাঝখানে রাখতে সাহায্য করে */
+            margin-bottom: auto; /* কন্টেইনারকে উল্লম্বভাবে মাঝখানে রাখতে সাহায্য করে */
+        }
+
+        /* Keyframes for container load animation */
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            animation: pulsateGlow 2.5s infinite ease-in-out;
+        }
+
+        /* Keyframes for pulsating glow */
+        @keyframes pulsateGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.5); }
+        }
+
+        h1 {
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #fbc2eb 0%, #a6c1ee 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+
+        .social-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .social-links li {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateX(-25px);
+            animation: slideInSmooth 0.7s ease-out forwards;
+        }
+
+        /* Staggered animation delay */
+        .social-links li:nth-child(1) { animation-delay: 0.6s; }
+        .social-links li:nth-child(2) { animation-delay: 0.7s; }
+        .social-links li:nth-child(3) { animation-delay: 0.8s; }
+        .social-links li:nth-child(4) { animation-delay: 0.9s; }
+        .social-links li:nth-child(5) { animation-delay: 1.0s; }
+
+
+        @keyframes slideInSmooth {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 15px 25px;
+            text-decoration: none;
+            color: var(--text-light);
+            background-color: var(--link-bg);
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .social-links a i {
+            font-size: 1.6em;
+            width: 40px;
+            text-align: center;
+            margin-right: 20px;
+            transition: transform 0.35s ease, color 0.35s ease;
+            position: relative;
+            z-index: 2;
+        }
+         .social-links a span {
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+            text-align: left;
+         }
+
+
+        /* Platform specific icon colors */
+         .social-links a.pinterest i { color: var(--pinterest-color); }
+         .social-links a.youtube i { color: var(--youtube-color); }
+         .social-links a.facebook i { color: var(--facebook-color); }
+         .social-links a.instagram i { color: #E4405F; } /* Single color fallback */
+         .social-links a.twitter i { color: var(--twitter-color); }
+
+
+        /* --- Shimmer Effect --- */
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                110deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.4) 50%,
+                transparent 70%
+            );
+            transition: left 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 1;
+        }
+
+        /* --- Hover Effects --- */
+        .social-links a:hover {
+            background-color: var(--link-hover-bg);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .social-links a:hover::before {
+            left: 100%;
+        }
+
+        .social-links a:hover i {
+            transform: scale(1.25) rotate(-8deg);
+            color: var(--text-light);
+        }
+
+         .social-links a.instagram:hover {
+             background: linear-gradient(45deg, var(--instagram-color-start), var(--instagram-color-end));
+             background-size: 150% 150%;
+             animation: instaHoverGradient 3s ease infinite;
+         }
+        @keyframes instaHoverGradient {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
+
+         /* Footer Style */
+        .footer {
+            margin-top: 45px;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 300;
+            opacity: 0;
+            animation: popIn 0.8s 1.5s ease-out forwards; /* Delayed fade in */
+        }
+         .footer a {
+             color: rgba(255, 255, 255, 0.9);
+             text-decoration: none;
+             font-weight: 400;
+             transition: color 0.3s ease, text-shadow 0.3s ease;
+         }
+         .footer a:hover {
+             color: #fff;
+             text-shadow: 0 0 5px rgba(255,255,255,0.7);
+         }
+
+         /* Media Query for smaller screens to ensure spacing */
+         @media (max-height: 750px) {
+             body {
+                 align-items: flex-start; /* Align to top on short screens */
+                 padding-top: 40px;
+                 padding-bottom: 40px;
+             }
+             .container {
+                 margin-top: 0; /* Remove auto margin for top alignment */
+                 margin-bottom: 20px; /* Add some bottom margin */
+             }
+         }
+
+         @media (max-width: 550px) {
+             .container {
+                 padding: 35px 30px; /* Reduce padding on small horizontal screens */
+             }
+             h1 {
+                 font-size: 2em; /* Slightly smaller heading */
+             }
+             .profile-pic {
+                 width: 110px;
+                 height: 110px;
+             }
+             .social-links a {
+                 padding: 12px 20px;
+                 font-size: 1em;
+             }
+              .social-links a i {
+                  font-size: 1.4em;
+                  width: 30px;
+                  margin-right: 15px;
+              }
+         }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- প্রোফাইল ছবি -->
+        <img src="https://via.placeholder.com/150/764BA2/FFFFFF?text=MMH" alt="Profile Picture" class="1745221256719.jpg" id="profilePic">
+
+        <h1>error-Free edit</h1>
+        <p class="subtitle">Connect with me on social media!</p>
+
+        <ul class="social-links">
+            <li>
+                <a href="https://www.pinterest.com/errorfreeedit/" target="_blank" rel="noopener noreferrer" class="pinterest">
+                    <i class="fab fa-pinterest"></i>
+                    <span>Pinterest</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/errorfreeedit" target="_blank" rel="noopener noreferrer" class="youtube">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.facebook.com/errorfreeedit/" target="_blank" rel="noopener noreferrer" class="facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.tiktok.com/@errorfreeedit/" target="_blank" rel="noopener noreferrer" class="facebook">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.instagram.com/errorfreeedit/" target="_blank" rel="noopener noreferrer" class="instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/mmhanas" target="_blank" rel="noopener noreferrer" class="twitter">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="footer">
+            &copy; 2025 error-Free edit. Crafted with <i class="fas fa-heart" style="color: #e4405f;"></i>.
+        </div>
+
+    </div>
+
+    <script>
+        // Profile picture fallback (same as before)
+        const profilePic = document.getElementById('profilePic');
+        if (profilePic) {
+            profilePic.onerror = function() {
+                this.src = 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Profile';
+                this.style.border = '4px solid rgba(200, 200, 200, 0.5)';
+                this.style.animation = 'none';
+            };
+        }
+    </script>
+
+</body>
+</html>
