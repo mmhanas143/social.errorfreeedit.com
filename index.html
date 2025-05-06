@@ -19,6 +19,11 @@
             --instagram-color-start: #f09433; /* For gradient */
             --instagram-color-end: #bc1888;   /* For gradient */
             --twitter-color: #1DA1F2;
+            --tiktok-color: #000000; /* TikTok icon color (often black or white) */
+            /* TikTok accent colors for potential hover, similar to Instagram */
+            --tiktok-accent1: #FE2C55; /* Pinkish-red */
+            --tiktok-accent2: #25F4EE; /* Cyan */
+
             --text-light: #ffffff;
             --text-dark: #333;
             --container-bg: rgba(255, 255, 255, 0.1);
@@ -39,8 +44,6 @@
             background-size: 400% 400%;
             animation: animateGradient 15s ease infinite;
             padding: 40px 20px; /* উপরে/নিচে এবং পাশে প্যাডিং যোগ করা হলো */
-            /* overflow: hidden; <-- এই লাইনটি মুছে ফেলা হয়েছে */
-            /* যদি কন্টেন্ট বেশি হয় তবে স্ক্রল আসবে */
             box-sizing: border-box; /* প্যাডিং যেন মোট width/height এর মধ্যে অন্তর্ভুক্ত হয় */
         }
 
@@ -135,6 +138,7 @@
         .social-links li:nth-child(3) { animation-delay: 0.8s; }
         .social-links li:nth-child(4) { animation-delay: 0.9s; }
         .social-links li:nth-child(5) { animation-delay: 1.0s; }
+        .social-links li:nth-child(6) { animation-delay: 1.1s; } /* Added for TikTok */
 
 
         @keyframes slideInSmooth {
@@ -186,6 +190,7 @@
          .social-links a.facebook i { color: var(--facebook-color); }
          .social-links a.instagram i { color: #E4405F; } /* Single color fallback */
          .social-links a.twitter i { color: var(--twitter-color); }
+         .social-links a.tiktok i { color: var(--tiktok-color); } /* TikTok icon color */
 
 
         /* --- Shimmer Effect --- */
@@ -220,7 +225,7 @@
 
         .social-links a:hover i {
             transform: scale(1.25) rotate(-8deg);
-            color: var(--text-light);
+            color: var(--text-light); /* Icon color changes to light on hover for all */
         }
 
          .social-links a.instagram:hover {
@@ -234,6 +239,24 @@
             100%{background-position:0% 50%}
         }
 
+        /* Optional: TikTok specific hover, if desired, similar to Instagram */
+        /*
+        .social-links a.tiktok:hover {
+             background: linear-gradient(45deg, var(--tiktok-accent1), var(--tiktok-accent2), var(--tiktok-accent1));
+             background-size: 200% 200%;
+             animation: tiktokHoverGradient 3s ease infinite;
+        }
+        @keyframes tiktokHoverGradient {
+            0%{background-position:0% 50%}
+            50%{background-position:100% 50%}
+            100%{background-position:0% 50%}
+        }
+        .social-links a.tiktok:hover i {
+            color: var(--text-light);
+        }
+        */
+
+
          /* Footer Style */
         .footer {
             margin-top: 45px;
@@ -241,7 +264,7 @@
             color: rgba(255, 255, 255, 0.65);
             font-weight: 300;
             opacity: 0;
-            animation: popIn 0.8s 1.5s ease-out forwards; /* Delayed fade in */
+            animation: popIn 0.8s 1.6s ease-out forwards; /* Adjusted delay due to more links */
         }
          .footer a {
              color: rgba(255, 255, 255, 0.9);
@@ -255,11 +278,11 @@
          }
 
          /* Media Query for smaller screens to ensure spacing */
-         @media (max-height: 750px) {
+         @media (max-height: 800px) { /* Increased breakpoint slightly due to more content */
              body {
                  align-items: flex-start; /* Align to top on short screens */
-                 padding-top: 40px;
-                 padding-bottom: 40px;
+                 padding-top: 30px;
+                 padding-bottom: 30px;
              }
              .container {
                  margin-top: 0; /* Remove auto margin for top alignment */
@@ -269,7 +292,7 @@
 
          @media (max-width: 550px) {
              .container {
-                 padding: 35px 30px; /* Reduce padding on small horizontal screens */
+                 padding: 35px 25px; /* Reduce padding on small horizontal screens */
              }
              h1 {
                  font-size: 2em; /* Slightly smaller heading */
@@ -279,7 +302,7 @@
                  height: 110px;
              }
              .social-links a {
-                 padding: 12px 20px;
+                 padding: 12px 18px; /* Adjusted padding slightly */
                  font-size: 1em;
              }
               .social-links a i {
@@ -288,15 +311,13 @@
                   margin-right: 15px;
               }
          }
-
-
     </style>
 </head>
 <body>
 
     <div class="container">
         <!-- প্রোফাইল ছবি -->
-        <img src="https://via.placeholder.com/150/764BA2/FFFFFF?text=MMH" alt="Profile Picture" class="profile-pic" id="profilePic">
+        <img src="1745221256719.jpg" alt="Profile Picture" class="profile-pic" id="profilePic">
 
         <h1>error-Free edit</h1>
         <p class="subtitle">Connect with me on social media!</p>
@@ -332,6 +353,12 @@
                     <span>Twitter</span>
                 </a>
             </li>
+            <li> <!-- নতুন টিকটক লিঙ্ক -->
+                <a href="https://www.tiktok.com/@errorfreeedit" target="_blank" rel="noopener noreferrer" class="tiktok">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+            </li>
         </ul>
 
         <div class="footer">
@@ -341,13 +368,15 @@
     </div>
 
     <script>
-        // Profile picture fallback (same as before)
+        // Profile picture fallback
         const profilePic = document.getElementById('profilePic');
         if (profilePic) {
             profilePic.onerror = function() {
                 this.src = 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Profile';
+                // Fallback visual style if custom image fails
                 this.style.border = '4px solid rgba(200, 200, 200, 0.5)';
-                this.style.animation = 'none';
+                this.style.boxShadow = '0 0 15px rgba(200, 200, 200, 0.3)';
+                this.style.animation = 'none'; // Disable pulsateGlow if image fails
             };
         }
     </script>
